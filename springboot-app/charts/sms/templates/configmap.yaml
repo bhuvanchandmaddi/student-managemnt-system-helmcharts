@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Chart.Name }}-configmap
+data:
+  {{- $config := .Files.Get "files/appconfig" }}
+  application.properties: |
+{{ $config | indent 4 }}
+  # application.properties: |
+  #   spring.datasource.url: {{ .Values.appconfig.datasource.jdbcurl | quote}}
+  #   spring.datasource.username: {{ .Values.appconfig.datasource.username | quote }}
+  #   spring.datasource.password: {{ .Values.appconfig.datasource.password | quote }}
+  #   spring.jpa.properties.hibernate.dialect: {{ .Values.appconfig.hibernate.dialect | quote }}
+  #   spring.jpa.hibernate.ddl-auto: {{ .Values.appconfig.hibernate.ddlauto | quote }}
+  #   logging.level.org.hibernate.SQL: {{ .Values.appconfig.hibernate.logginglevel| quote  }}

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "sms.fullname" . }}
+  labels:
+    {{- include "sms.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.ports.containerPort }}
+      name: http
+  selector:
+    {{- include "sms.selectorLabels" . | nindent 4 }}

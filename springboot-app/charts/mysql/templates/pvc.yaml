@@ -1,0 +1,12 @@
+# pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Name }}-mysql-pvc
+spec:
+  accessModes:
+    - {{ .Values.mysqldb.persistence.accessMode | quote }}
+  resources:
+    requests:
+      storage: {{ .Values.mysqldb.persistence.size | quote }}
+  storageClassName: {{ .Values.mysqldb.persistence.storageClass | quote }}

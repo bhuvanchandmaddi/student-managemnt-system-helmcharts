@@ -1,0 +1,12 @@
+mysql:
+  # values are hardcoded in application.properties file
+  # If you change anything here, then deployment will break
+  # Change in application.properties as well. This will be fixed soon
+  rootPassword: "root"
+  user: "springboot"
+  password: "springboot"
+  database: "studentsms"
+sms:
+  image:
+    repository: bmaddi/studentmanagement-springboot-app
+    tag: 18.daa4759
