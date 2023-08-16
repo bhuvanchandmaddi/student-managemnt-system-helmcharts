@@ -9,4 +9,4 @@ mysql:
 sms:
   image:
     repository: bmaddi/studentmanagement-springboot-app
-    tag: 27.38b0213
+    tag: 31.8fba4e5
