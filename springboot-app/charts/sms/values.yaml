@@ -18,7 +18,7 @@ image:
   repository: bmaddi/studentmanagement-springboot-app
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 18.daa4759
+  tag: 14.3e23cf2
 
 imagePullSecrets: []
 nameOverride: ""
