@@ -1,0 +1,1 @@
+export GREETINGS="greetings from envvars"

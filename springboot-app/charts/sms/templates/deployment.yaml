@@ -33,8 +33,11 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["java"]
-          args: ["-jar", "/app/student-management-system-0.0.1-SNAPSHOT.jar", "--spring.config.location=/config/application.properties"]
+          # command: [ "/bin/bash", "-c", "--" ]
+          # args: ['"java -Dspring.config.location=file:/newconfig/application.yaml"']
+          command: ["/bin/sh", "-c"]
+          args: [". /newconfig/envvars && java -jar /app/student-management-system-0.0.1-SNAPSHOT.jar --spring.config.location=/newconfig/application.yaml"]
+          #args: ["java -jar /app/student-management-system-0.0.1-SNAPSHOT.jar --spring.config.location=/newconfig/application.yaml"]
           ports:
             - name: http
               containerPort: {{ .Values.ports.containerPort }}
@@ -54,6 +57,8 @@ spec:
           volumeMounts:
           - name: app-config
             mountPath: "/config"
+          - name: testconfigvolume
+            mountPath: /newconfig
       volumes:
       - name: app-config
         configMap:
@@ -61,6 +66,9 @@ spec:
           items:
           - key: "application.properties"
             path: "application.properties"
+      - name: testconfigvolume
+        configMap:
+          name: testconfig
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

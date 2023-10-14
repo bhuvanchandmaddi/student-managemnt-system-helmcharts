@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "mysql.fullname" . }}-init-script
+data:
+  init.sql: |-
+    -- Create the `studentsms` database
+    CREATE DATABASE studentsms;
+    -- Create the `springboot` user with the password `springboot`
+    CREATE USER 'springboot'@'%' IDENTIFIED BY 'springboot';
+    -- Grant all privileges on the `studentsms` database to the `springboot` user
+    GRANT ALL PRIVILEGES ON studentsms.* TO 'springboot'@'%';
+    -- Reload the privileges to apply the changes
+    FLUSH PRIVILEGES;
