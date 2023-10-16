@@ -17,4 +17,4 @@ logging:
         SQL: DEBUG
 
 greeting:
-  message: ${GREETINGS}
+  message: GREETINGS
